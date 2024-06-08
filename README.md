@@ -44,7 +44,7 @@ Then the user is redirected to the contact list
 Scenario: Login
 Given the user has an account
 When the user logs into the system with correct information
-Then the user should login
+Then the user is redirected to the contact list
 
 Scenario: Create contact with minimum information
 Given the user is seeing their contact list

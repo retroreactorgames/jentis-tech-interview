@@ -9,14 +9,3 @@
 // ***********************************************
 //
 //
-Cypress.Commands.add("waitAPICall", (method, url, alias) => {
-  cy.intercept(
-    {
-      method: method,
-      url: url,
-    },
-    []
-  ).as(alias);
-
-  cy.wait(`@${alias}`);
-});

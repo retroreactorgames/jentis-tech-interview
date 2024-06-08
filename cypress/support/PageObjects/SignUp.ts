@@ -1,9 +1,9 @@
-// Common elements that can be used by many different pages
+import { CommonData, CommonMethods } from "../PageObjects/Common";
+
 export const SignUpData = {
   Strings: {
     name: "John",
     surname: "Doe",
-    email: "john@doe.com",
     password: "jentis12345",
   },
 
@@ -17,9 +17,8 @@ export const SignUpData = {
   },
 };
 
-//Common methods
 export const SignUpMethods = {
-  fillForm: (
+  fillSignUpForm: (
     name: string,
     surname: string,
     email: string,
@@ -30,22 +29,27 @@ export const SignUpMethods = {
     cy.get(SignUpData.Locators.emailField).type(email);
     cy.get(SignUpData.Locators.password).type(password);
   },
-  listenToAPIFormResponse: () => {
-    cy.intercept(
-      {
-        method: "POST",
-        url: "https://api.testing.powerus.de/companies/company-contact",
+
+  creatingUserAPI: (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) => {
+    cy.request({
+      method: "POST",
+      url: "https://thinking-tester-contact-list.herokuapp.com/users",
+      body: {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
       },
-      []
-    ).as("formAPI");
-  },
-  /*
-  verifySuccessfulFormBody: (alias: any) => {
-    cy.wait(`@${alias}`).then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-      const responseBody = interception.response.body;
-      expect(responseBody).to.have.property("id").and.not.to.be.empty;
+    }).then((response) => {
+      expect(response.status).to.eq(201);
+      expect(response.body.user.firstName).to.eq(firstName);
+      expect(response.body.user.lastName).to.eq(lastName);
+      expect(response.statusText).to.eq("Created");
     });
   },
-  */
 };
