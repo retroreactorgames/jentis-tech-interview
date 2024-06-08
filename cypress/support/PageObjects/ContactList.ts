@@ -3,5 +3,6 @@ export const ContactListData = {
     logoutBtn: "#logout",
     addContactBtn: "#add-contact",
     contactTable: "table.contactTable",
+    contactTableBodyRow: ".contactTableBodyRow",
   },
 };

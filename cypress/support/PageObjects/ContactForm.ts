@@ -57,6 +57,69 @@ export const ContactFormMethods = {
     cy.get(ContactFormData.Locators.country).type(country);
   },
 
+  clearContactForm: () => {
+    cy.get(ContactFormData.Locators.firstName).clear();
+    cy.get(ContactFormData.Locators.lastName).clear();
+    cy.get(ContactFormData.Locators.dateOfBirth).clear();
+    cy.get(ContactFormData.Locators.emailField).clear();
+    cy.get(ContactFormData.Locators.phone).clear();
+    cy.get(ContactFormData.Locators.street1).clear();
+    cy.get(ContactFormData.Locators.street2).clear();
+    cy.get(ContactFormData.Locators.city).clear();
+    cy.get(ContactFormData.Locators.state).clear();
+    cy.get(ContactFormData.Locators.postal).clear();
+    cy.get(ContactFormData.Locators.country).clear();
+  },
+
+  loginAndAddContactAPI: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    birthdate: string,
+    phone: string,
+    street1: string,
+    street2: string,
+    city: string,
+    stateProvince: string,
+    postalCode: string,
+    country: string
+  ) => {
+    cy.request({
+      method: "POST",
+      url: "https://thinking-tester-contact-list.herokuapp.com/users/login",
+      body: {
+        email: email,
+        password: password,
+      },
+    }).then((response) => {
+      const token = response.body.token;
+      const bearer = "Bearer" + " " + token;
+
+      cy.request({
+        method: "POST",
+        url: "https://thinking-tester-contact-list.herokuapp.com/contacts",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: bearer,
+        },
+        body: {
+          firstName: firstName,
+          lastName: lastName,
+          birthdate: birthdate,
+          email: email,
+          phone: phone,
+          street1: street1,
+          street2: street2,
+          city: city,
+          stateProvince: stateProvince,
+          postalCode: postalCode,
+          country: country,
+        },
+      });
+    });
+  },
+
   addContactAPI: (
     firstName: string,
     lastName: string,
@@ -70,9 +133,16 @@ export const ContactFormMethods = {
     postalCode: string,
     country: string
   ) => {
+    const token = Cypress.env("token");
+    const bearer = "Bearer" + " " + token;
+
     cy.request({
       method: "POST",
       url: "https://thinking-tester-contact-list.herokuapp.com/contacts",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer,
+      },
       body: {
         firstName: firstName,
         lastName: lastName,

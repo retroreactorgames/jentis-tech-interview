@@ -8,8 +8,7 @@ beforeEach(() => {
 });
 
 Given("a possible user is accessing the application", () => {
-  
-  cy.visit(`${CommonData.URLs.baseUrl}/contactList`);
+  cy.visit(`${CommonData.URLs.baseUrl}`);
 });
 
 When("the user creates a new account", () => {

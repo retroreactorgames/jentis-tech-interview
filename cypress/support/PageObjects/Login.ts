@@ -25,6 +25,10 @@ export const LoginMethods = {
         password: password,
       },
     }).then((response) => {
+      const token = response.body.token;
+      cy.log(token);
+      Cypress.env("token", token);
+      cy.log(Cypress.env("token"));
       expect(response.status).to.eq(200);
       expect(response.body.user.email).to.eq(email);
       expect(response.statusText).to.eq("OK");

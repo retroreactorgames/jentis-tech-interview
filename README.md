@@ -46,7 +46,7 @@ Given the user has an account
 When the user logs into the system with correct information
 Then the user is redirected to the contact list
 
-Scenario: Create contact with minimum information
+Scenario: Create contact with complete information
 Given the user is seeing their contact list
 When the user adds a new contact with minimum information
 Then the user sees the new contact created
@@ -54,30 +54,32 @@ Then the user sees the new contact created
 Regression Test Suite
 Scenario: Edit contact
 Given the user is seeing a contact details
-When the user edit this contact
+When the user edits this contact
 Then the user sees the edited information in the contact list
 
 Scenario: Cancel editing contact
 Given the user is editing a contact
-When the user cancel the editing
+When the user cancels the editing
 Then the user sees the contact information not edited
 
+Scenario: Delete contact
+Given the user is seeing a contact details
+When the user deletes this contact
+Then the user sees the contact list empty
+
+Scenario: Logout
+Given the user is seeing their contact list
+When the user logs out
+Then the user is redirected to the login page
+
+(I wouldn't create a scenario for this since we have plenty of tests that access this page and check data)
 Scenario: Contact details
 Given the user is on the contact list
 And the user has a contact created
 When the user clicks on the contact
 Then the user sees the contact details for this contact
 
-Scenario: Create contact with all optional fields
-Given the user is creating a contact
-When the user fills every field
-Then the user sees all the fields filled in the contact list
-
-Scenario: Logout
-Given the user is logged in
-When the user logs out
-Then the user is redirected to the login page
-
+(Integration test, probably not the best to be automated on Cypress, although it is easy to do it)
 Scenario: Update User information
 Given the developer has an user
 When the developer update this user information
