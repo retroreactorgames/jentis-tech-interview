@@ -5,7 +5,7 @@ Access the API documentation here -> https://documenter.getpostman.com/view/4012
 
 Note that the API documentation is the only resource provided for this app.
 
-###Questions
+### Questions
 
 **1. What additional documentation or information would have made planning the tests for this app more efficient?**
 
@@ -33,13 +33,13 @@ For hierarchy, although I think the most important feature is contacts, we canno
 
 Now it is time to put the mindmap into use and write test cases for all the discovered scenarios, creating a regression test suite that will ensure we are testing the most important features of the system.
 
-###Task
+### Task
 
 **First, create functional test cases for the web application and document them. You can use any format you want and when you are done upload the documentation to the repository.**
 
 Before the regression test suite, I believe it is a good practice to start with a Sanity Test Suite, which will have the most important tests, then, we can evolve it to a full regression test suite. I decided to use the Gherkin syntax, since I am a big fan of BDD for its simplicity and accessibility across the whole team.
 
-####Sanity Test Suite
+#### Sanity Test Suite
 
 **Scenario: Sign up**  
 **Given** a possible user is accessing the application  
@@ -56,7 +56,7 @@ Before the regression test suite, I believe it is a good practice to start with 
 **When** the user adds a new contact with minimum information  
 **Then** the user sees the new contact created
 
-####Regression Test Suite
+#### Regression Test Suite
 
 **Scenario: Edit contact**
 **Given** the user is seeing a contact details  
@@ -96,7 +96,8 @@ _(Integration test, probably not the best to be automated on Cypress, although i
 
 For the automation, I decided to use Cypress with Typescript as the coding language, because I believe it's the current tech stack for E2E testing on Jentis? (I might be wrong here)
 
-####Setup
+#### Setup
+
 **Cloning the Repository**
 This the repository I've used for this coding challenge. It is a public one, so just go ahead and clone it.  
 https://github.com/retroreactorgames/jentis-tech-interview
@@ -128,7 +129,7 @@ It should install the correct dependencies to run the tests.
 
 This command will open cypress and start its server.
 
-####Code Organisation
+#### Code Organisation
 
 **Tests**
 _/cypress/e2e_  
